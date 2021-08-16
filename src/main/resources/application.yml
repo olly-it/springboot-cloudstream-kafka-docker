@@ -1,0 +1,20 @@
+spring:
+   cloud:
+      stream:
+         # define functions that will be used on bindings
+         function:
+            definition: AProcessor;BConsumer
+         # kafka is the message engine
+         kafka:
+            binder:
+               brokers: localhost:29092
+               replicationFactor: 1
+         # define  bindings
+         bindings:
+            # syntax is: <function&ComponentName>-in-0 or <function&ComponentName>-in-0
+            AProcessor-in-0:
+               destination: queueA
+            AProcessor-out-0:
+               destination: queueB
+            BConsumer-in-0:
+               destination: queueB
