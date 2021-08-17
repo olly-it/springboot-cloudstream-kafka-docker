@@ -21,3 +21,8 @@ The following guides illustrate how to use some features concretely:
 
 ### thanks to
 https://github.com/henriquels25/spring-cloud-stream-sample
+
+### with kinesis binder
+https://spring.io/blog/2021/06/04/spring-integration-aws-2-5-1-and-spring-cloud-stream-kinesis-binder-2-2-0-available
+  
+Olly
