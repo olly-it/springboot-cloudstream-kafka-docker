@@ -1,9 +1,11 @@
+server:
+  port : 8080
 spring:
    cloud:
       stream:
          # define functions that will be used on bindings
          function:
-            definition: AProcessor;BConsumer
+            definition: AProcessor;BConsumer;StringConsumer
          # kafka is the message engine
          kafka:
             binder:
@@ -13,8 +15,15 @@ spring:
          bindings:
             # syntax is: <function&ComponentName>-in-0 or <function&ComponentName>-in-0
             AProcessor-in-0:
+               group: group1
                destination: queueA
             AProcessor-out-0:
+               group: group1
                destination: queueB
             BConsumer-in-0:
+               group: group1
                destination: queueB
+            StringConsumer-in-0:
+               group: group1
+               destination: stringQ
+            #define consumer group (spring.cloud.stream.bindings.<channel>.group=<name>)
