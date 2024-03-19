@@ -1,19 +1,19 @@
 server:
-  port : 8080
+   port : 8080
 spring:
    cloud:
       stream:
-         # define functions that will be used on bindings
-         function:
-            definition: AProcessor;BConsumer;StringConsumer
          # kafka is the message engine
          kafka:
             default:
                consumer:
                   startOffset: latest
             binder:
-               brokers: localhost:29092
+               brokers: localhost:9092
                replicationFactor: 1
+         # functional processing
+         function:
+            definition: AProcessor;BConsumer;StringConsumer;StringMultipleConsumer
          # define  bindings
          bindings:
             # syntax is: <function&ComponentName>-in-0 or <function&ComponentName>-in-0
@@ -29,4 +29,9 @@ spring:
             StringConsumer-in-0:
                group: group5
                destination: stringQ
-            #define consumer group (spring.cloud.stream.bindings.<channel>.group=<name>)
+            StringMultipleConsumer-in-0:
+               group: group5
+               #destination: stringMultipleQ.*
+               destination: stringMultipleQ_1,stringMultipleQ_2
+# for multi-server grouping, see:
+# https://stackoverflow.com/questions/54850308/spring-cloud-stream-consumer-group-bound

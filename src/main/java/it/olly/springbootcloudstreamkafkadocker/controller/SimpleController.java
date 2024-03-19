@@ -52,7 +52,7 @@ class SimpleController {
     @GetMapping(path = "/send")
     public String sendMsg(@RequestParam(name = "msg", required = true) String msg) {
         System.out.println("SimpleController: msg[" + msg + "] -> stringQ");
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1; i++) { // 100
             final int x = i;
             (new Thread(() -> {
                 streamBridge.send("stringQ", msg + " #" + x);
